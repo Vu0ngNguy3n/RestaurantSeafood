@@ -1,0 +1,125 @@
+
+
+.cartContent{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 80px;
+    .cartLeft{
+        width: 60%;
+        padding-right: 10px;
+        table{
+            width: 100%;
+            thead{
+                border-bottom: 3px solid var(--secondary);
+                th{
+                padding: 10px 8px;
+                }
+            }
+            tbody{
+                td{
+                    padding: 8px 4px;
+                }
+                .totalNumber{
+                    display: flex;
+                    justify-content: left;
+                    button{
+                        padding: 2px 6px;
+                        border: 1px solid rgba(24, 11, 15, 0.3);
+                        font-size: 1.6rem;
+                        font-weight: 400;
+                    }
+                    span{
+                        padding: 4px 8px;
+                        color: #f9004d;
+                        font-weight: bold;
+                    }
+                }
+
+            }
+        }
+        .backToShop{
+            margin: 30px 0;
+            button{
+                border: 1px solid transparent;
+                outline: none;
+                padding: 6px 14px;
+                background-color: var(--primary);
+                border-radius: 4px;
+                color: white;
+                font-weight: 600;
+                font-size: 1.6rem;
+                transition: .4s;
+                span{
+                    padding: 0 4px;
+                }
+                &:hover{
+                    transform: scale(1.05);
+                }
+
+            }
+        }
+    }
+
+    .cartRight{
+        width: 40%;
+        h3{
+            font-size: 2.4rem;
+            font-weight: bold;
+            padding: 10px 8px;
+        }
+        .temporaryPrice{
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+            padding: 20px 4px;
+            b{
+                font-size: 1.8rem;
+                margin-right: 10px;
+                line-height: 16px;
+            }
+            span{
+                text-align: right;
+                line-height: 16px;
+                font-size: 14px;
+                font-weight: 600;
+                color: rgba(249, 0, 77,0.6);
+            }
+        }
+        .totalPrice{
+             display: flex;
+            width: 90%;
+            justify-content: space-between;
+            padding: 20px 4px;
+            b{
+                font-size: 1.8rem;
+                margin-right: 10px;
+                line-height: 16px;
+            }
+            span{
+                line-height: 16px;
+                font-size: 24px;
+                font-weight: 600;
+                color: #f9004d;
+
+            }
+        }
+        button{
+            border: 1px solid transparent;
+            cursor: pointer;
+            outline: none;
+            background-color: var(--secondary);
+            padding: 6px 14px;
+            margin-top: 20px;
+            border-radius: 4px;
+            color: white;
+            font-size: 1.6rem;
+            font-weight: 600;
+            transition: .4s;
+            &:hover{
+                background-color: var(--primary);
+                transform: scale(1.1);
+            }
+        }
+    }
+}

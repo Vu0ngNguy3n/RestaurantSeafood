@@ -1,0 +1,222 @@
+{
+    "seafood": [
+        {
+            "seafoodType": 1,
+            "id": 1,
+            "name": "Tôm sú",
+            "price": 450000,
+            "img": "https://i.pinimg.com/564x/79/c2/97/79c29703179dba9911c6f7de221b72b3.jpg"
+        },
+        {
+          "seafoodType": 1,
+          "id": 2,
+          "name": "Tôm Hùm",
+          "price": 900000,
+          "img": "https://i.pinimg.com/564x/79/c2/97/79c29703179dba9911c6f7de221b72b3.jpg"
+        },
+        {
+          "seafoodType": 1,
+          "id": 3,
+          "name": "Tôm He",
+          "price": 550000,
+          "img": "https://i.pinimg.com/564x/79/c2/97/79c29703179dba9911c6f7de221b72b3.jpg"
+        },
+        {
+          "seafoodType": 1,
+          "id": 4,
+          "name": "Tôm Rằn",
+          "price": 350000,
+          "img": "https://i.pinimg.com/564x/79/c2/97/79c29703179dba9911c6f7de221b72b3.jpg"
+        },
+        {
+          "seafoodType": 2,
+          "id": 5,
+          "name": "Cua biển",
+          "price": 800000,
+          "img": "https://i.pinimg.com/564x/79/c2/97/79c29703179dba9911c6f7de221b72b3.jpg"
+        },
+        {
+          "seafoodType": 2,
+          "id": 6,
+          "name": "Cua Cà Mau",
+          "price": 70000,
+          "img": "https://i.pinimg.com/564x/79/c2/97/79c29703179dba9911c6f7de221b72b3.jpg"
+        },
+        {
+          "seafoodType": 2,
+          "id": 7,
+          "name": "Cua Alaska",
+          "price": 1100000,
+          "img": "https://i.pinimg.com/564x/79/c2/97/79c29703179dba9911c6f7de221b72b3.jpg"
+        },
+        {
+          "seafoodType": 2,
+          "id": 8,
+          "name": "Cua Hoàng Đế",
+          "price": 1200000,
+          "img": "https://i.pinimg.com/564x/79/c2/97/79c29703179dba9911c6f7de221b72b3.jpg"
+        },
+        {
+          "seafoodType": 3,
+          "id": 9,
+          "name": "Mực Trứng",
+          "price": 45000,
+          "img": "https://i.pinimg.com/564x/79/c2/97/79c29703179dba9911c6f7de221b72b3.jpg"
+        },{
+          "seafoodType": 3,
+          "id": 10,
+          "name": "Mực Ống",
+          "price": 500000,
+          "img": "https://i.pinimg.com/564x/79/c2/97/79c29703179dba9911c6f7de221b72b3.jpg"
+        },
+        {
+          "seafoodType": 3,
+          "id": 11,
+          "name": "Mực Nhảy",
+          "price": 700000,
+          "img": "https://i.pinimg.com/564x/79/c2/97/79c29703179dba9911c6f7de221b72b3.jpg"
+        },
+        {
+          "seafoodType": 3,
+          "id": 12,
+          "name": "Bạch Tuộc",
+          "price": 300000,
+          "img": "https://i.pinimg.com/564x/79/c2/97/79c29703179dba9911c6f7de221b72b3.jpg"
+        },
+        {
+          "seafoodType": 3,
+          "id": 13,
+          "name": "Mực Nang",
+          "price": 1200000,
+          "img": "https://i.pinimg.com/564x/79/c2/97/79c29703179dba9911c6f7de221b72b3.jpg"
+        },
+        {
+          "seafoodType": 3,
+          "id": 14,
+          "name": "Mực Thường",
+          "price": 300000,
+          "img": "https://i.pinimg.com/564x/79/c2/97/79c29703179dba9911c6f7de221b72b3.jpg"
+        },
+        {
+          "seafoodType": 4,
+          "id": 15,
+          "name": "Ghẹ Xanh",
+          "price": 400000,
+          "img": "https://i.pinimg.com/564x/79/c2/97/79c29703179dba9911c6f7de221b72b3.jpg"
+        },
+        {
+          "seafoodType": 4,
+          "id": 16,
+          "name": "Ghẹ Ba Mắt",
+          "price": 400000,
+          "img": "https://i.pinimg.com/564x/79/c2/97/79c29703179dba9911c6f7de221b72b3.jpg"
+        },
+        {
+          "seafoodType": 4,
+          "id": 17,
+          "name": "Ghẹ Đá",
+          "price": 400000,
+          "img": "https://i.pinimg.com/564x/79/c2/97/79c29703179dba9911c6f7de221b72b3.jpg"
+        },{
+          "seafoodType": 4,
+          "id": 18,
+          "name": "Ghẹ Đỏ",
+          "price": 400000,
+          "img": "https://i.pinimg.com/564x/79/c2/97/79c29703179dba9911c6f7de221b72b3.jpg"
+        },
+        {
+          "seafoodType": 5,
+          "id": 19,
+          "name": "Cá Thu",
+          "price": 400000,
+          "img": "https://i.pinimg.com/564x/79/c2/97/79c29703179dba9911c6f7de221b72b3.jpg"
+        },
+        {
+          "seafoodType": 5,
+          "id": 20,
+          "name": "Cá Chình",
+          "price": 400000,
+          "img": "https://i.pinimg.com/564x/79/c2/97/79c29703179dba9911c6f7de221b72b3.jpg"
+        },
+        {
+          "seafoodType": 5,
+          "id": 21,
+          "name": "Cá Ù",
+          "price": 400000,
+          "img": "https://i.pinimg.com/564x/79/c2/97/79c29703179dba9911c6f7de221b72b3.jpg"
+        },{
+          "seafoodType": 5,
+          "id": 22,
+          "name": "Cá Trích",
+          "price": 400000,
+          "img": "https://i.pinimg.com/564x/79/c2/97/79c29703179dba9911c6f7de221b72b3.jpg"
+        }
+        ,{
+          "seafoodType": 5,
+          "id": 23,
+          "name": "Cá Mú",
+          "price": 400000,
+          "img": "https://i.pinimg.com/564x/79/c2/97/79c29703179dba9911c6f7de221b72b3.jpg"
+        },
+        {
+          "seafoodType": 5,
+          "id": 24,
+          "name": "Cá Lăng",
+          "price": 400000,
+          "img": "https://i.pinimg.com/564x/79/c2/97/79c29703179dba9911c6f7de221b72b3.jpg"
+        },
+        {
+          "seafoodType": 6,
+          "id": 25,
+          "name": "Bề Bề",
+          "price": 400000,
+          "img": "https://i.pinimg.com/564x/79/c2/97/79c29703179dba9911c6f7de221b72b3.jpg"
+        },
+        {
+          "seafoodType": 6,
+          "id": 26,
+          "name": "Cụp Cụp",
+          "price": 400000,
+          "img": "https://i.pinimg.com/564x/79/c2/97/79c29703179dba9911c6f7de221b72b3.jpg"
+        },
+        {
+          "seafoodType": 6,
+          "id": 27,
+          "name": "Hàu",
+          "price": 400000,
+          "img": "https://i.pinimg.com/564x/79/c2/97/79c29703179dba9911c6f7de221b72b3.jpg"
+        },{
+          "seafoodType": 6,
+          "id": 28,
+          "name": "Sò",
+          "price": 400000,
+          "img": "https://i.pinimg.com/564x/79/c2/97/79c29703179dba9911c6f7de221b72b3.jpg"
+        }
+    ],
+    "types":[
+      {
+        "seafoodType": 1,
+        "seafoodName": "Tôm"
+      },
+      {
+        "seafoodType": 2,
+        "seafoodName": "Cua"
+      },
+      {
+        "seafoodType": 3,
+        "seafoodName": "Mực"
+      },
+      {
+        "seafoodType": 4,
+        "seafoodName": "Ghẹ"
+      },
+      {
+        "seafoodType": 5,
+        "seafoodName": "Cá"
+      },
+      {
+        "seafoodType": 6,
+        "seafoodName": "Các loại hải sản khác"
+      }
+    ]
+}

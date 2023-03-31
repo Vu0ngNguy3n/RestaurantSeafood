@@ -1,0 +1,68 @@
+.seafoodContent{
+    display: flex;
+    flex-direction: column;
+    h2{
+        margin-top: 30px;
+        padding-left: 20px;
+        font-weight: bold;
+        font-size: 2.8rem;
+        color: var(--secondary);
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        word-spacing: 3px;
+    }
+
+    .list-seafood{
+        margin-top: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+     .item {
+      margin: 5px;
+      padding: 10px 4px;
+      display: flex;
+      border-radius: 10px;
+      flex-direction: column;
+      width: 22%;
+      text-align: center;
+      align-items: center;
+      img {
+        width: 85%;
+        height: 80%;
+        border-radius: 10px;
+        transition: 0.4s;
+        &:hover {
+          opacity: 0.5;
+          transform: scale(1);
+          cursor: pointer;
+        }
+      }
+      b {
+        font-size: 1.6rem;
+        font-weight: 600;
+      }
+      .price {
+        color: var(--primary);
+      }
+      button {
+        border: 1px solid transparent;
+        width: 100%;
+        background-color: var(--secondary);
+        padding: 2px;
+        border-radius: 5px;
+        color: white;
+        &:hover {
+          background-color: var(--primary);
+        }
+        span {
+          font-weight: 400;
+        }
+      }
+      &:hover {
+        box-shadow: 0 14px 28px rgba(243, 119, 67, 0.25),
+          0 10px 10px rgba(0, 153, 215, 0.22);
+      }
+    }
+}
+}

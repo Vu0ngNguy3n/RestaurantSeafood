@@ -1,0 +1,27 @@
+@import "normalize.css";
+
+:root {
+  --primary: #0099d7;
+  --secondary: #f37743;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Josefin Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+  line-height: 1.5;
+  text-rendering: optimizeSpeed;
+}
+
+hr {
+  background-color: var(--primary);
+  width: 90%;
+}

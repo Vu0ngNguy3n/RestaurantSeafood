@@ -1,0 +1,40 @@
+.policy {
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  button {
+    padding: 4px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    border: 0.8px solid var(--primary);
+    width: 21%;
+    border-radius: 10px;
+    .left {
+      img {
+        width: 80%;
+        height: 80%;
+      }
+      width: 30%;
+    }
+    .right {
+      width: 70%;
+      text-align: left;
+      p {
+        img {
+          width: 20%;
+        }
+        margin: 0;
+        font-size: 1.6rem;
+        font-weight: 600;
+      }
+      span {
+        font-size: 1.2rem;
+        font-weight: 400;
+      }
+    }
+    &:hover{
+        background-color: rgba(0, 153, 215, 0.4);
+    }
+  }
+}

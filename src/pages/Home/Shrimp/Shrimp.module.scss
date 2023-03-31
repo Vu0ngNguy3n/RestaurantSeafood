@@ -1,0 +1,63 @@
+.shrimp {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid var(--primary);
+  min-height: 460px;
+  border-radius: 10px;
+}
+
+.left {
+  width: 30%;
+  img {
+    width: 100%;
+    height: 80%;
+    border-radius: 5%;
+  }
+}
+
+.right {
+  width: 66%;
+  .rowContent {
+    display: flex;
+    align-items: center;
+  }
+  p {
+    text-transform: uppercase;
+    color: var(--secondary);
+  }
+  p > .iconShopping {
+    margin-right: 8px;
+  }
+  .shrimpList {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 4px;
+    .shrimpItems {
+      width: 30%;
+      text-align: center;
+      img {
+        width: 100%;
+      }
+      b {
+        color: var(--primary);
+        font-size: 1.4rem;
+        font-weight: 600;
+      }
+      span {
+        color: rgba(255, 0, 0, 0.8);
+        font-size: 1.2rem;
+        font-weight: 400;
+      }
+    }
+  }
+  .shrimpContent {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    height: 35%;
+    img {
+      width: 98%;
+      border-radius: 10px;
+    }
+  }
+}

@@ -1,0 +1,69 @@
+.sidebar {
+  width: 21%;
+  height: 80%;
+  box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+  // border-right: 1.5px solid #EDF1D6;
+}
+
+.sidebarFixed {
+  position: fixed;
+  top: 80px;
+  
+}
+
+.homepageLi{
+  display: flex;
+}
+.menu {
+  list-style-type: none;
+  padding: 4px;
+  margin-top: 8px;
+  li {
+    color: var(--secondary);
+    display: flex;
+    padding: 8px;
+    .icon {
+      padding-right: 8px;
+    }
+    &:hover {
+      cursor: pointer;
+      color: var(--primary);
+    }
+  }
+}
+
+p {
+  margin-top: 12px;
+  color: var(--primary);
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.listseafood ul,
+.contact ul {
+  list-style-type: none;
+  padding: 0;
+  li {
+    padding: 8px;
+
+    .seafoodicon,.iconcontact {
+      margin-right: 6px;
+    }
+    span {
+      display: flex;
+      font-weight: 600;
+      font-size: 1.8rem;
+      color: var(--secondary);
+    }
+    &:hover {
+      cursor: pointer;
+      span {
+        color: var(--primary);
+      }
+    }
+  }
+}
+.hr {
+  background-color: var(--primary);
+  width: 80%;
+}
