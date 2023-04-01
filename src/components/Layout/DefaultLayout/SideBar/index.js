@@ -18,6 +18,7 @@ function SideBar() {
 
   const handleForward = (id) => {
     navigate(`/seafood/${id}`);
+    window.scroll(0,0)
   };
   useEffect(() => {
     fetch("http://localhost:8000/types", {

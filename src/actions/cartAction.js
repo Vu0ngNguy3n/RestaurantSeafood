@@ -5,7 +5,19 @@ export const addToCart = (cart) => {
     }
 }
 
+export const addDetail = (cart) => {
+  return{
+    type: "ADD_DETAILS",
+    payload: cart
+  }
+}
 
+export const removeItem = (cart) => {
+  return{
+    type: "REMOVE_ITEM",
+    payload: cart
+  }
+}
 export const increaseItem = (cart) => {
     return{
         type: 'INCREASE_ITEM',

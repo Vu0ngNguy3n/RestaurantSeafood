@@ -2,20 +2,25 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
-import { decreaseItem, increaseItem } from "../../actions/cartAction";
+import {
+  addDetail,
+  decreaseItem,
+  increaseItem,
+  removeItem,
+} from "../../actions/cartAction";
 import "./Cart.scss";
 
 function Cart() {
   const cartList = useSelector((state) => state.cart);
   const [total, setTotal] = useState(0);
+  const [itemCover, setItemCover] = useState(null)
 
   useEffect(() => {
-      let newTotalPrice = 0;
-      cartList.forEach((cart) => {
-        console.log(cart.price * cart.total);
-        newTotalPrice = newTotalPrice + cart.price * cart.total;
-      });
-      setTotal(newTotalPrice);
+    let newTotalPrice = 0;
+    cartList.forEach((cart) => {
+      newTotalPrice = newTotalPrice + cart.price * cart.total;
+    });
+    setTotal(newTotalPrice);
   }, [cartList]);
 
   const navigate = useNavigate();
@@ -25,58 +30,90 @@ function Cart() {
     navigate("/");
   };
 
+  const moveToDetail = (id) => {
+    navigate(`/detail/${id}`);
+  };
+
   const handeIncrease = (item) => {
     const newItem = item;
     const action = increaseItem(newItem);
     dispatch(action);
-    toast(`${item.name} đã được tăng lên ${item.total + 1} Kg!!!`)
+    toast(`${item.name} đã được tăng lên ${item.total + 1} Kg!!!`);
   };
   const handeDecrease = (item) => {
-    if(item.total !== 0){
+    if (item.total !== 0) {
       const newItem = item;
       const action = decreaseItem(newItem);
       dispatch(action);
       toast(`${item.name} đã được giảm xuống ${item.total - 1} Kg!!!`);
-    }else{
+    } else {
       toast(`Không thể giảm số lượng của ${item.name}`);
     }
   };
+  const handleRemove = (item) => {
+    const newItem = item;
+    setItemCover(item)
+    const action = removeItem(newItem);
+    dispatch(action);
+    toast(`Xoá ${newItem.name} khỏi giỏ hàng thành công!!!`);
+  };
 
+  const handleAdd = () =>{
+    const action = addDetail(itemCover)
+    dispatch(action)
+    toast(`Khôi phục ${itemCover.name} thành công`)
+    setItemCover(null)
+  }
   return (
     <div className="cartDetail">
       <h2>Shopping Cart</h2>
       <hr />
       <div className="cartContent">
         <div className="cartLeft">
+          {itemCover !== null?
+          <div className="cover">
+            <p>"{itemCover.name}" đã bị xoá.</p>
+            <span onClick={() => handleAdd()}>Khôi phục?</span>
+          </div>
+          :''}
           <table>
             <thead>
               <th>SẢN PHẨM</th>
               <th>GIÁ</th>
               <th>SỐ LƯỢNG</th>
               <th>TỔNG</th>
+              <th></th>
             </thead>
             <tbody>
               {cartList.map((item, index) => {
                 return (
                   <tr key={index}>
-                    <td>{item?.name}</td>
+                    <td onClick={() => moveToDetail(item?.id)} className="name">
+                      {item?.name}
+                    </td>
                     <td>{item?.price}VNĐ/kg</td>
                     <td className="totalNumber">
-                        <button
-                          className="btnTotal"
-                          onClick={() => handeDecrease(item)}
-                        >
-                          -
-                        </button>
-                        <span>{item?.total}</span>
-                        <button
-                          className="btnTotal"
-                          onClick={() => handeIncrease(item)}
-                        >
-                          +
-                        </button>
+                      <button
+                        className="btnTotal"
+                        onClick={() => handeDecrease(item)}
+                      >
+                        -
+                      </button>
+                      <span>{item?.total}</span>
+                      <button
+                        className="btnTotal"
+                        onClick={() => handeIncrease(item)}
+                      >
+                        +
+                      </button>
                     </td>
                     <td>{item?.totalPrice}VNĐ</td>
+                    <td>
+                      <i
+                        class="fa-sharp fa-regular fa-circle-xmark"
+                        onClick={() => handleRemove(item)}
+                      ></i>
+                    </td>
                   </tr>
                 );
               })}

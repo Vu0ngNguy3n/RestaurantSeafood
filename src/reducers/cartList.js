@@ -30,6 +30,26 @@ const cartReducer = (state = initState, action) => {
 
       return [...newList];
     }
+    case "ADD_DETAILS":{
+      const newList = [...state]
+      const newItem = action.payload
+      const findIndex = newList.findIndex(item => item.id === newItem.id)
+      if(findIndex===-1){
+        newList.push(newItem)
+      }else{
+        const newTotal = newList[findIndex].total
+        const newCardItem = {
+          id: newItem.id,
+          name: newItem.name,
+          price: newItem.price,
+          img: newItem.img,
+          total: +newItem.total + +newTotal,
+          totalPrice: newItem.price * (+newItem.total + +newTotal),
+        };
+        newList.splice(findIndex,1,newCardItem)
+      }
+      return [...newList]
+    }
     case "INCREASE_ITEM": {
       const newList = [...state];
       const newCartItem = {
@@ -63,6 +83,12 @@ const cartReducer = (state = initState, action) => {
         newList.splice(index, 1, newCartItem);
         return [...newList];
       }
+    }
+    case "REMOVE_ITEM":{
+      const newList = [...state]
+      const index = newList.findIndex(item => item.id === action.payload.id)
+      newList.splice(index,1)
+      return  [...newList]
     }
     default:
       return state;
