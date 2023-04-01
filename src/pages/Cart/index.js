@@ -64,6 +64,10 @@ function Cart() {
     toast(`Khôi phục ${itemCover.name} thành công`)
     setItemCover(null)
   }
+
+  const handlePayment = () =>{
+    navigate('/payment')
+  }
   return (
     <div className="cartDetail">
       <h2>Shopping Cart</h2>
@@ -144,7 +148,7 @@ function Cart() {
             <span>{total}</span>
           </div>
           <hr />
-          <button>Tiến hành thanh toán</button>
+          <button onClick={handlePayment}>Tiến hành thanh toán</button>
         </div>
       </div>
     </div>
