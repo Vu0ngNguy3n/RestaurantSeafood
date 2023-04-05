@@ -39,12 +39,18 @@ function BestSeller(){
           {bestSeller.map(item => {
             return (
               <div className={styles.item} key={item.id}>
-                <img src={item.img} onClick={() => moveDetail(item.id)}/>
+                <img src={item.img} onClick={() => moveDetail(item.id)} />
                 <b>{item.name}</b>
                 <br />
-                <span className={styles.price}>{item.price}đ/kg</span>
+                <span className={styles.price}>
+                  {item.price.toLocaleString("en-US", {
+                    style: "currency",
+                    currency: "VND",
+                  })}
+                  đ/kg
+                </span>
                 <button>
-                  <span onClick={()=> handleAdd(item)}>THÊM VÀO GIỎ</span>
+                  <span onClick={() => handleAdd(item)}>THÊM VÀO GIỎ</span>
                 </button>
               </div>
             );

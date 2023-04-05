@@ -13,7 +13,7 @@ import "./Cart.scss";
 function Cart() {
   const cartList = useSelector((state) => state.cart);
   const [total, setTotal] = useState(0);
-  const [itemCover, setItemCover] = useState(null)
+  const [itemCover, setItemCover] = useState(null);
 
   useEffect(() => {
     let newTotalPrice = 0;
@@ -52,34 +52,36 @@ function Cart() {
   };
   const handleRemove = (item) => {
     const newItem = item;
-    setItemCover(item)
+    setItemCover(item);
     const action = removeItem(newItem);
     dispatch(action);
     toast(`Xoá ${newItem.name} khỏi giỏ hàng thành công!!!`);
   };
 
-  const handleAdd = () =>{
-    const action = addDetail(itemCover)
-    dispatch(action)
-    toast(`Khôi phục ${itemCover.name} thành công`)
-    setItemCover(null)
-  }
+  const handleAdd = () => {
+    const action = addDetail(itemCover);
+    dispatch(action);
+    toast(`Khôi phục ${itemCover.name} thành công`);
+    setItemCover(null);
+  };
 
-  const handlePayment = () =>{
-    navigate('/payment')
-  }
+  const handlePayment = () => {
+    navigate("/payment");
+  };
   return (
     <div className="cartDetail">
       <h2>Shopping Cart</h2>
       <hr />
       <div className="cartContent">
         <div className="cartLeft">
-          {itemCover !== null?
-          <div className="cover">
-            <p>"{itemCover.name}" đã bị xoá.</p>
-            <span onClick={() => handleAdd()}>Khôi phục?</span>
-          </div>
-          :''}
+          {itemCover !== null ? (
+            <div className="cover">
+              <p>"{itemCover.name}" đã bị xoá.</p>
+              <span onClick={() => handleAdd()}>Khôi phục?</span>
+            </div>
+          ) : (
+            ""
+          )}
           <table>
             <thead>
               <th>SẢN PHẨM</th>
@@ -92,10 +94,17 @@ function Cart() {
               {cartList.map((item, index) => {
                 return (
                   <tr key={index}>
-                    <td onClick={() => moveToDetail(item?.id)} className="name">
+                    <td onClick={() => moveToDetail(item?.id)} className="name" >
                       {item?.name}
+                      <img  src={item?.img} alt=""/>
                     </td>
-                    <td>{item?.price}VNĐ/kg</td>
+                    <td>
+                      {item?.price.toLocaleString("en-US", {
+                        style: "currency",
+                        currency: "VND",
+                      })}
+                      VNĐ/kg
+                    </td>
                     <td className="totalNumber">
                       <button
                         className="btnTotal"
@@ -111,7 +120,13 @@ function Cart() {
                         +
                       </button>
                     </td>
-                    <td>{item?.totalPrice}VNĐ</td>
+                    <td>
+                      {item?.totalPrice.toLocaleString("en-US", {
+                        style: "currency",
+                        currency: "VND",
+                      })}
+                      VNĐ
+                    </td>
                     <td>
                       <i
                         class="fa-sharp fa-regular fa-circle-xmark"
@@ -135,7 +150,13 @@ function Cart() {
           <hr />
           <div className="temporaryPrice">
             <b>Tạm tính:</b>
-            <span>{total}</span>
+            <span>
+              {total.toLocaleString("en-US", {
+                style: "currency",
+                currency: "VND",
+              })}{" "}
+              VNĐ
+            </span>
           </div>
           <div className="temporaryPrice">
             <b>Giao hàng:</b>
@@ -145,7 +166,13 @@ function Cart() {
           </div>
           <div className="totalPrice">
             <b>Tổng:</b>
-            <span>{total}</span>
+            <span>
+              {total.toLocaleString("en-US", {
+                style: "currency",
+                currency: "VND",
+              })}{" "}
+              VNĐ
+            </span>
           </div>
           <hr />
           <button onClick={handlePayment}>Tiến hành thanh toán</button>

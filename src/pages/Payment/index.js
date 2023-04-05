@@ -12,6 +12,17 @@ function Payment() {
   const [phone, setPhone] = useState('')
   const navigate = useNavigate()
 
+  const config = {
+    Usename: "haisanhonglien@yopmail.com",
+    Password: "3A1CC03362E6C783C443B2ED34DD852D728F",
+    Host: "smtp.elasticemail.com",
+    Port: 2525,
+    To: "them@website.com",
+    From: "you@isp.com",
+    Subject: "This is the subject",
+    Body: "And this is the body",
+  };
+
   useEffect(() => {
     let total = 0;
     cartList.forEach((cart) => {
@@ -19,6 +30,17 @@ function Payment() {
     });
     setSeafoodPrice(total);
   }, [cartList]);
+
+  const handleMail = () =>{
+    const customer = {
+        name: name,
+        address: address,
+        hometown: hometown,
+        phone: phone,
+        payment: cartList
+    }
+    console.log(customer);
+  }
 
   return (
     <div className="paymentContent">
@@ -28,27 +50,30 @@ function Payment() {
           <label>
             Họ Và Tên <span style={{ color: "#f9004d" }}>*</span>
           </label>
-          <input value={name} onChange={e => setName(e.target.value)}/>
+          <input value={name} onChange={(e) => setName(e.target.value)} />
         </div>
         <div className="paymentInput">
           <label>
             Địa Chỉ <span style={{ color: "#f9004d" }}>*</span>
           </label>
-          <input value={address} onChange={e=> setAddress(e.target.value)}/>
+          <input value={address} onChange={(e) => setAddress(e.target.value)} />
         </div>
         <div className="paymentInput">
           <label>
             Tỉnh/ Thành Phố <span style={{ color: "#f9004d" }}>*</span>
           </label>
-          <input value={hometown} onChange={e => setHometown(e.target.value)}/>
+          <input
+            value={hometown}
+            onChange={(e) => setHometown(e.target.value)}
+          />
         </div>
         <div className="paymentInput">
           <label>
             Số điện thoại <span style={{ color: "#f9004d" }}>*</span>
           </label>
-          <input value={phone} onChange={e => setPhone(e.target.value)} />
+          <input value={phone} onChange={(e) => setPhone(e.target.value)} />
         </div>
-        <button onClick={() => navigate('/cart')}>Quay lại giỏ hàng</button>
+        <button onClick={() => navigate("/cart")}>Quay lại giỏ hàng</button>
       </div>
 
       <div className="rightPayment">
@@ -66,7 +91,13 @@ function Payment() {
                   <h5>
                     {cart.name} x {cart.total}
                   </h5>
-                  <span>{cart.totalPrice}VNĐ</span>
+                  <span>
+                    {cart.totalPrice.toLocaleString("en-US", {
+                      style: "currency",
+                      currency: "VND",
+                    })}
+                    VNĐ
+                  </span>
                 </div>
               );
             })}
@@ -74,7 +105,13 @@ function Payment() {
           <hr />
           <div className="totalPrice">
             <h5>Tạm tính</h5>
-            <span>{seafoodPrice}VNĐ</span>
+            <span>
+              {seafoodPrice.toLocaleString("en-US", {
+                style: "currency",
+                currency: "VND",
+              })}
+              VNĐ
+            </span>
           </div>
           <hr />
           <div className="totalPrice">
@@ -84,14 +121,23 @@ function Payment() {
           <hr />
           <div className="totalPrice">
             <h5>Tổng</h5>
-            <span>{seafoodPrice}VNĐ</span>
+            <span>
+              {seafoodPrice.toLocaleString("en-US", {
+                style: "currency",
+                currency: "VND",
+              })}
+              VNĐ
+            </span>
           </div>
           <hr />
           <div className="typePayment">
             <div className="banking">
               <div className="bankingTitle">
                 <input type={"radio"} name="pay" id="banking" checked />
-                <h2 htmlFor='banking' style={{ marginBottom: "0", marginLeft: "10px" }}>
+                <h2
+                  htmlFor="banking"
+                  style={{ marginBottom: "0", marginLeft: "10px" }}
+                >
                   {" "}
                   Chuyển khoản ngân hàng
                 </h2>
@@ -117,7 +163,7 @@ function Payment() {
             </div>
           </div>
           <div className="confirmPayment">
-            <button>ĐẶT HÀNG</button>
+            <button onClick={() => handleMail()}>ĐẶT HÀNG</button>
           </div>
         </div>
       </div>
