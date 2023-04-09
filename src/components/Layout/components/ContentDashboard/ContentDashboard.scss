@@ -1,0 +1,39 @@
+.contentDashboard {
+  width: 70%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  .card {
+    width: calc(100% / 4 - 30px);
+    margin: 16px 0;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border-radius: 4px;
+
+    img {
+      width: 100%;
+      height: 70%;
+      border-radius: 4px;
+        
+      &:hover {
+        opacity: 0.9;
+        cursor: pointer;
+      }
+    }
+
+    h3 {
+      padding-top: 12px;
+      font-size: 2rem;
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    span {
+      color: #f9004d;
+      font-weight: 500;
+      font-size: 1.6rem;
+    }
+  }
+}
