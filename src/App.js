@@ -1,15 +1,15 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import {publicRoutes} from './routes/index'
-import DefaultLayout from './components/Layout/DefaultLayout/index'
+import { publicRoutes } from "./routes/index";
+import DefaultLayout from "./components/Layout/DefaultLayout/index";
 import { createContext, Fragment } from "react";
+import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-export const CartContext = createContext()
+export const CartContext = createContext();
+
+axios.defaults.baseURL = "http://localhost:8000";
 
 function App() {
-  
-  
-
   return (
     <BrowserRouter>
       <div className="App">

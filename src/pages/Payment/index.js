@@ -91,7 +91,7 @@ function Payment() {
                   <h5>
                     {cart.name} x {cart.total}
                   </h5>
-                  <span>
+                  <span style={{textAlign: "right"}}>
                     {cart.totalPrice.toLocaleString("en-US", {
                       style: "currency",
                       currency: "VND",
@@ -106,7 +106,7 @@ function Payment() {
           <div className="totalPrice">
             <h5>Tạm tính</h5>
             <span>
-              {seafoodPrice.toLocaleString("en-US", {
+              {seafoodPrice?.toLocaleString("en-US", {
                 style: "currency",
                 currency: "VND",
               })}
@@ -122,7 +122,7 @@ function Payment() {
           <div className="totalPrice">
             <h5>Tổng</h5>
             <span>
-              {seafoodPrice.toLocaleString("en-US", {
+              {seafoodPrice?.toLocaleString("en-US", {
                 style: "currency",
                 currency: "VND",
               })}

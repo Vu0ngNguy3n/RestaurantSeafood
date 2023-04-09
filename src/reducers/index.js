@@ -1,9 +1,10 @@
 const { combineReducers } = require("redux");
 const { default: cartReducer } = require("./cartList");
-
+const { default: accountReducer } = require("./account");
 
 const rootReducer = combineReducers({
-    cart: cartReducer
-})
+  cart: cartReducer,
+//   account: accountReducer,
+});
 
-export default rootReducer
+export default rootReducer;

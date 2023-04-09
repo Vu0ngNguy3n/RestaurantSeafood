@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 import { addToCart } from '../../../actions/cartAction';
 import styles from './BestSeller.module.scss'
+import axios from 'axios'
 
 function BestSeller(){
   const [bestSeller, setBestSeller] = useState([])
@@ -12,11 +13,12 @@ function BestSeller(){
   const dispatch = useDispatch()
   
   useEffect(()=>{
-    fetch("http://localhost:8000/seafood",{
-      method: "GET"
+    axios.get("/restaurant/seafood")
+    .then(res => {
+      const bestSellers = res.data
+      setBestSeller(bestSellers)
     })
-    .then(response => response.json())
-    .then(data => setBestSeller(data))
+    .catch(error => console.log(error))
   },[])
 
   const handleAdd =(item) => {
@@ -38,8 +40,8 @@ function BestSeller(){
         <div className={styles.listItems}>
           {bestSeller.map(item => {
             return (
-              <div className={styles.item} key={item.id}>
-                <img src={item.img} onClick={() => moveDetail(item.id)} />
+              <div className={styles.item} key={item._id}>
+                <img src={item.img} onClick={() => moveDetail(item._id)} />
                 <b>{item.name}</b>
                 <br />
                 <span className={styles.price}>

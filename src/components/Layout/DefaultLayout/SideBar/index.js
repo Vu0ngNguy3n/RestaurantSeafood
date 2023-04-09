@@ -11,6 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import axios from 'axios'
 
 function SideBar() {
   const [types, setTypes] = useState([]);
@@ -21,12 +22,13 @@ function SideBar() {
     window.scroll(0,0)
   };
   useEffect(() => {
-    fetch("http://localhost:8000/types", {
-      method: "GET",
+    axios.get("http://localhost:8000/restaurant/typeSeafood")
+    .then(res => {
+      const types = res.data
+      setTypes(types)
     })
-      .then((response) => response.json())
-      .then((data) => setTypes(data));
-  }, []);
+    .catch(err => console.log(err))
+  }, []); 
   return (
     <div className={styles.sidebar}>
       <div className={styles.sidebarFixed}>
@@ -57,13 +59,13 @@ function SideBar() {
           <ul>
             {types.map((t) => {
               return (
-                <li key={t.seafoodType}>
-                  <span onClick={() => handleForward(t.seafoodType)}>
+                <li key={t?.seafoodType}>
+                  <span onClick={() => handleForward(t?.seafoodType)}>
                     <FontAwesomeIcon
                       className={styles.seafoodicon}
                       icon={faShrimp}
                     />
-                    Shop {t.seafoodName}
+                    Shop {t?.seafoodName}
                   </span>
                 </li>
               );

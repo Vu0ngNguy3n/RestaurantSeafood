@@ -6,39 +6,36 @@ import { toast } from "react-toastify";
 import { addToCart } from "../../actions/cartAction";
 import { CartContext } from "../../App";
 import "./seafood.scss";
+import axios from "axios";
 
 function Seafood() {
   const [seafoodName, setSeafoodName] = useState("");
   const [listSeafood, setListSeafood] = useState([]);
-  const { id } = useParams("id");
+  const { slug } = useParams("id");
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-
-  const moveDetail = (id) =>{
-    navigate(`/detail/${id}`)
-  }
+  const moveDetail = (id) => {
+    navigate(`/detail/${id}`);
+  };
 
   useEffect(() => {
-    const newId = parseInt(id);
-    fetch("http://localhost:8000/types", {
-      method: "GET",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        const seafoodName = data.find((d) => d.seafoodType === newId);
-        setSeafoodName(seafoodName.seafoodName);
-      });
+    axios
+      .get(`/restaurant/seafood/list/${slug}`)
+      .then((res) => {
+        const list= res.data
+        setListSeafood(list)
+      })
+      .catch((err) => console.log(err));
 
-    fetch("http://localhost:8000/seafood", {
-      method: "GET",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        const newListSeafood = data.filter((d) => d.seafoodType === newId);
-        setListSeafood([...newListSeafood]);
-      });
-  }, [id]);
+      axios
+        .get(`/restaurant/typeSeafood/detail/${slug}`)
+        .then((res) => {
+          const type = res.data;
+          setSeafoodName(type[0]?.seafoodName);
+        })
+        .catch((err) => console.log(err));
+  }, [slug]);
 
   const handleAdd = (item) => {
     const newItem = item;
@@ -54,12 +51,12 @@ function Seafood() {
       <div className="list-seafood">
         {listSeafood.map((item) => {
           return (
-            <div className="item" key={item.id}>
-              <img src={item.img} onClick={() => moveDetail(item.id)} />
-              <b>{item.name}</b>
+            <div className="item" key={item?._id}>
+              <img src={item.img} onClick={() => moveDetail(item?._id)} />
+              <b>{item?.name}</b>
               <br />
               <span className="price">
-                {item.price.toLocaleString("en-US", {
+                {item?.price.toLocaleString("en-US", {
                   style: "currency",
                   currency: "VND",
                 })}

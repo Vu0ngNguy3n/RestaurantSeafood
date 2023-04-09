@@ -5,18 +5,18 @@ const cartReducer = (state = initState, action) => {
     case "ADD_TO_CART": {
       const newList = [...state];
       const newCartItem = {
-        id: action.payload.id,
+        _id: action.payload._id,
         name: action.payload.name,
         price: action.payload.price,
         img: action.payload.img,
         total: 1,
         totalPrice: action.payload.price,
       };
-      const findSeafood = newList.find((e) => e.id === action.payload.id);
+      const findSeafood = newList.find((e) => e._id === action.payload._id);
       if (findSeafood !== undefined) {
-        const index = newList.findIndex((e) => e.id === findSeafood.id);
+        const index = newList.findIndex((e) => e._id === findSeafood._id);
         const newItem = {
-          id: findSeafood.id,
+          _id: findSeafood._id,
           name: findSeafood.name,
           price: findSeafood.price,
           img: findSeafood.img,
@@ -33,13 +33,13 @@ const cartReducer = (state = initState, action) => {
     case "ADD_DETAILS":{
       const newList = [...state]
       const newItem = action.payload
-      const findIndex = newList.findIndex(item => item.id === newItem.id)
+      const findIndex = newList.findIndex(item => item._id === newItem._id)
       if(findIndex===-1){
         newList.push(newItem)
       }else{
         const newTotal = newList[findIndex].total
         const newCardItem = {
-          id: newItem.id,
+          _id: newItem._id,
           name: newItem.name,
           price: newItem.price,
           img: newItem.img,
@@ -53,14 +53,14 @@ const cartReducer = (state = initState, action) => {
     case "INCREASE_ITEM": {
       const newList = [...state];
       const newCartItem = {
-        id: action.payload.id,
+        _id: action.payload._id,
         name: action.payload.name,
         price: action.payload.price,
         img: action.payload.img,
         total: action.payload.total + 1,
         totalPrice: action.payload.price * (action.payload.total + 1),
       };
-      const index = newList.findIndex((item) => item.id === action.payload.id);
+      const index = newList.findIndex((item) => item._id === action.payload._id);
       newList.splice(index, 1, newCartItem);
       return [...newList];
     }
@@ -70,7 +70,7 @@ const cartReducer = (state = initState, action) => {
         return [...state];
       } else {
         const newCartItem = {
-          id: action.payload.id,
+          _id: action.payload._id,
           name: action.payload.name,
           price: action.payload.price,
           img: action.payload.img,
@@ -78,7 +78,7 @@ const cartReducer = (state = initState, action) => {
           totalPrice: action.payload.price * (action.payload.total - 1),
         };
         const index = newList.findIndex(
-          (item) => item.id === action.payload.id
+          (item) => item._id === action.payload._id
         );
         newList.splice(index, 1, newCartItem);
         return [...newList];
@@ -86,7 +86,7 @@ const cartReducer = (state = initState, action) => {
     }
     case "REMOVE_ITEM":{
       const newList = [...state]
-      const index = newList.findIndex(item => item.id === action.payload.id)
+      const index = newList.findIndex(item => item._id === action.payload._id)
       newList.splice(index,1)
       return  [...newList]
     }
