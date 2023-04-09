@@ -26,9 +26,9 @@ function ContentDashboard() {
         <h3>Thêm hải sản</h3>
       </div>
       {seafoods.map((item, index) => (
-        <div className="card" key={index}>
+        <div className="card" key={index} >
           <img src={item.img} alt={item.name} />
-          <h3>
+          <h3 onClick={() => navigate(`/admin/editSeafood/${item._id}`)}>
             {item.name} <i class="fa-solid fa-pen-to-square"></i>
           </h3>
           <span>

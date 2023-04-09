@@ -7,22 +7,26 @@ import "./AddSeafood.scss";
 
 function AddSeafood() {
   const [typesSeafood, setTypesSeafood] = useState([]);
-    const [name, setName] = useState('')
-    const [type, setType]  = useState('')
-    const [price, setPrice] = useState()
-    const navigate = useNavigate()
+  const [name, setName] = useState("");
+  const [type, setType] = useState(1);
+  const [price, setPrice] = useState();
+  const navigate = useNavigate();
 
-    const handleAdd = () => {
-        const newSeafood = {
-          seafoodType: type,
-          name: name,
-          price: price,
-          img: "https://haisantrungnam.vn/wp-content/uploads/2020/03/cua-hoang-de-king-crab-cua-huynh-de-cua-alaska-5-600x600.jpg",
-        };
-        axios.post("/restaurant/seafood/",newSeafood);
-        toast(`Đã thêm Hải sản ${name} thành công!!!`)
-        navigate('/admin/home')
-    }
+  const handleAdd = () => {
+    const newSeafood = {
+      seafoodType: type,
+      name: name,
+      price: price,
+      img: "https://haisantrungnam.vn/wp-content/uploads/2020/03/cua-hoang-de-king-crab-cua-huynh-de-cua-alaska-5-600x600.jpg",
+    };
+    axios
+      .post("/restaurant/seafood/", newSeafood)
+      .then((res) => {
+        toast(`Đã thêm Hải sản ${name} thành công!!!`);
+        navigate("/admin/home");
+      })
+      .catch(console.log("Khong the them"));
+  };
 
   useEffect(() => {
     axios
@@ -66,7 +70,7 @@ function AddSeafood() {
         </div>
         <div className="inputButton">
           <button onClick={handleAdd}>Thêm</button>
-          <button onClick={() => navigate('/admin/home')}>Trở về </button>
+          <button onClick={() => navigate("/admin/home")}>Trở về </button>
         </div>
       </div>
     </div>
