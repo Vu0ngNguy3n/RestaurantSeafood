@@ -14,7 +14,7 @@ function SeafoodDetail() {
   const [id, setId] = useState();
   const [star, setStar] = useState(0);
   const [comment, setComment] = useState("");
-  const textRef = useRef()
+  const textRef = useRef();
   const dispatch = useDispatch();
 
   const [listComment, setListComment] = useState([]);
@@ -25,10 +25,8 @@ function SeafoodDetail() {
       .then((res) => {
         setListComment(res.data[0]?.comment);
         setId(res.data[0]._id);
-         
       })
       .catch((err) => console.log(err));
-     
   }, [isComment]);
 
   const handleComment = () => {
@@ -40,30 +38,36 @@ function SeafoodDetail() {
         content: comment,
       },
     };
-    if (listComment === undefined) {
-      axios
-        .post("/restaurant/comment", saveComment)
-        .then((res) => {
-          toast("Bình luận thành công");
-          setIsComment(!isComment);
-          setComment("");
-          textRef.current.focus();
-        })
-        .catch((err) => {
-          toast("Không thể bình luận");
-        });
+    if (comment === "" || star === 0) {
+      toast(
+        "Vui lòng bình luận và đánh giá sao cho sản phẩm trước khi hoàn tất đánh giá!!!"
+      );
     } else {
-      axios
-        .post(`/restaurant/comment/updateComment/${id}`, saveComment)
-        .then((res) => {
-          toast("update thanh cong");
-          setIsComment(!isComment);
-          setComment("");
-          textRef.current.focus();
-        })
-        .catch((err) => {
-          toast("khong the add");
-        });
+      if (listComment === undefined) {
+        axios
+          .post("/restaurant/comment", saveComment)
+          .then((res) => {
+            toast("Bình luận thành công");
+            setIsComment(!isComment);
+            setComment("");
+            textRef.current.focus();
+          })
+          .catch((err) => {
+            toast("Không thể bình luận");
+          });
+      } else {
+        axios
+          .post(`/restaurant/comment/updateComment/${id}`, saveComment)
+          .then((res) => {
+            toast("update thanh cong");
+            setIsComment(!isComment);
+            setComment("");
+            textRef.current.focus();
+          })
+          .catch((err) => {
+            toast("khong the add");
+          });
+      }
     }
   };
 
@@ -277,8 +281,11 @@ function SeafoodDetail() {
               <ul>
                 {listComment?.map((item, index) => (
                   <li key={index}>
-                    <i class="fa-solid fa-user" style={{marginRight: '4px'}}></i>
-                     {item?.content}
+                    <i
+                      class="fa-solid fa-user"
+                      style={{ marginRight: "4px" }}
+                    ></i>
+                    {item?.content}
                   </li>
                 ))}
               </ul>

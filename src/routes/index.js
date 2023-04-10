@@ -8,6 +8,7 @@ import Payment from "../pages/Payment";
 import HomeDashboard from "../pages/HomeDashboard";
 import AddSeafood from "../pages/Admin/AddSeafood";
 import EditSeafood from "../pages/Admin/EditSeafood";
+import Login from "../pages/Login/Login";
 
 const publicRoutes = [
   { path: "/", component: Home },
@@ -16,9 +17,14 @@ const publicRoutes = [
   { path: "/cart", component: Cart, layout: HeaderOnly },
   { path: "/detail/:slug", component: SeafoodDetail, layout: HeaderOnly },
   { path: "/payment", component: Payment, layout: HeaderOnly },
-  {path: "/admin/home", component: HomeDashboard, layout: HeaderOnly },
-  {path: '/admin/addSeafood', component: AddSeafood, layout: HeaderOnly},
-  {path: '/admin/editSeafood/:slug', component: EditSeafood, layout: HeaderOnly}
+  { path: "/admin/home", component: HomeDashboard, layout: HeaderOnly },
+  { path: "/admin/addSeafood", component: AddSeafood, layout: HeaderOnly },
+  {
+    path: "/admin/editSeafood/:slug",
+    component: EditSeafood,
+    layout: HeaderOnly,
+  },
+  { path: "login", component: Login, layout: HeaderOnly },
 ];
 
 const privateRoutes = [];

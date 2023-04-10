@@ -4,7 +4,7 @@ const { default: accountReducer } = require("./account");
 
 const rootReducer = combineReducers({
   cart: cartReducer,
-//   account: accountReducer,
+  account: accountReducer,
 });
 
 export default rootReducer;

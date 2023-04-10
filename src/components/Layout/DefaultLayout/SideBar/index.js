@@ -34,20 +34,16 @@ function SideBar() {
       <div className={styles.sidebarFixed}>
         <ul className={styles.menu}>
           <li>
-            <Link to="/" className="homepageLi">
-              <h3>
-                <FontAwesomeIcon className={styles.icon} icon={faHouse} />
-                <p>Trang chủ</p>
-              </h3>
-            </Link>
+            <h3 onClick={() => navigate("/")}>
+              <FontAwesomeIcon className={styles.icon} icon={faHouse} />
+              Trang chủ
+            </h3>
           </li>
           <li>
-            <Link to='/cart'>
-              <h3>
-                <FontAwesomeIcon className={styles.icon} icon={faCartShopping} />
-                Giỏ hàng
-              </h3>
-            </Link>
+            <h3 onClick={() => navigate("/cart")}>
+              <FontAwesomeIcon className={styles.icon} icon={faCartShopping} />
+              Giỏ hàng
+            </h3>
           </li>
           <li>
             <FontAwesomeIcon />

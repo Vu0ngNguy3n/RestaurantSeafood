@@ -5,6 +5,7 @@ import { createContext, Fragment } from "react";
 import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Page404 from "./pages/404Page";
 export const CartContext = createContext();
 
 axios.defaults.baseURL = "http://localhost:8000";
@@ -34,6 +35,7 @@ function App() {
               />
             );
           })}
+          <Route path="*" element={<Page404/>} />
         </Routes>
       </div>
       <ToastContainer />

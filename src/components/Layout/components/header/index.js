@@ -3,8 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark, faSpinner, faSearch, faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import {default as Image} from './seafood.png'
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 function Header() {
   const navigate = useNavigate()
+  const account = useSelector(state => state.account)
   return (
     <header className={styles.wrapper}>
       <div className={styles.inner}>
@@ -33,8 +35,9 @@ function Header() {
           </Link>
           <button className={styles.loginBtn} onClick={() => navigate('/admin/home')}>
             <p>Quản lí</p>
+            {account.username === undefined?'no':account.displayName}
           </button>
-          <button className={styles.loginBtn}>
+          <button className={styles.loginBtn} onClick={()=> navigate('/login')}>
             <p>Đăng nhập</p>
           </button>
         </div>
