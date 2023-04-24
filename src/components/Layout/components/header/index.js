@@ -3,10 +3,25 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark, faSpinner, faSearch, faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import {default as Image} from './seafood.png'
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../../../actions/accountAction";
 function Header() {
   const navigate = useNavigate()
   const account = useSelector(state => state.account)
+  const cart = useSelector(state => state.cart)
+  const dispatch = useDispatch()
+
+  const handleLogin = () =>{
+    navigate('/login')
+  }
+
+  const handleLogout = () =>{
+    const  account = {}
+    const action = logout(account)
+    dispatch(action)
+    navigate('/login')
+  }
+
   return (
     <header className={styles.wrapper}>
       <div className={styles.inner}>
@@ -32,14 +47,28 @@ function Header() {
               className={styles.cartShopping}
               icon={faCartShopping}
             />
+            <span className={styles.dot}>{cart.length}</span>
           </Link>
-          <button className={styles.loginBtn} onClick={() => navigate('/admin/home')}>
-            <p>Quản lí</p>
-            {account.username === undefined?'no':account.displayName}
+          <button className={styles.loginBtn}>
+            {account?.username === undefined
+              ? ""
+              : `Chào ${account?.displayName}`}
           </button>
-          <button className={styles.loginBtn} onClick={()=> navigate('/login')}>
-            <p>Đăng nhập</p>
+          <button
+            className={styles.loginBtn}
+            onClick={() => navigate("/admin/home")}
+          >
+            {account?.role === 0 ? <p>Quản lí</p> : ""}
           </button>
+          {account?.username === undefined ? (
+            <button className={styles.loginBtn} onClick={handleLogin}>
+              <p>Đăng nhập</p>
+            </button>
+          ) : (
+            <button className={styles.loginBtn} onClick={handleLogout}>
+              <p>Đăng xuất</p>
+            </button>
+          )}
         </div>
       </div>
     </header>

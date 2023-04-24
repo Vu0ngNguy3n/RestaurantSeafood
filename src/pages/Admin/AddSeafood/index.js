@@ -13,19 +13,23 @@ function AddSeafood() {
   const navigate = useNavigate();
 
   const handleAdd = () => {
-    const newSeafood = {
-      seafoodType: type,
-      name: name,
-      price: price,
-      img: "https://haisantrungnam.vn/wp-content/uploads/2020/03/cua-hoang-de-king-crab-cua-huynh-de-cua-alaska-5-600x600.jpg",
-    };
-    axios
-      .post("/restaurant/seafood/", newSeafood)
-      .then((res) => {
-        toast(`Đã thêm Hải sản ${name} thành công!!!`);
-        navigate("/admin/home");
-      })
-      .catch(console.log("Khong the them"));
+    if(name == '' || price === undefined ){
+      toast('Vui long dien day du thong tin hai san!!!')
+    }else{
+       const newSeafood = {
+         seafoodType: type,
+         name: name,
+         price: price,
+         img: "https://haisantrungnam.vn/wp-content/uploads/2020/03/cua-hoang-de-king-crab-cua-huynh-de-cua-alaska-5-600x600.jpg",
+       };
+       axios
+         .post("/restaurant/seafood/", newSeafood)
+         .then((res) => {
+           toast(`Đã thêm Hải sản ${name} thành công!!!`);
+           navigate("/admin/home");
+         })
+         .catch(console.log("Khong the them"));
+    }
   };
 
   useEffect(() => {
@@ -51,8 +55,8 @@ function AddSeafood() {
           <label>Loại hải sản </label>
           <select name="typeSeafood" onChange={(e) => setType(e.target.value)}>
             {typesSeafood.map((item, index) => (
-              <option name="typeSeafood" key={index} value={item.seafoodType}>
-                {item.seafoodName}
+              <option name="typeSeafood" key={index} value={item?.seafoodType}>
+                {item?.seafoodName}
               </option>
             ))}
           </select>

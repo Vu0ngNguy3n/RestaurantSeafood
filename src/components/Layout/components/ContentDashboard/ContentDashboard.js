@@ -32,7 +32,7 @@ function ContentDashboard() {
             {item.name} <i class="fa-solid fa-pen-to-square"></i>
           </h3>
           <span>
-            {item.price.toLocaleString("en-US", {
+            {item?.price?.toLocaleString("en-US", {
               style: "currency",
               currency: "VND",
             })}

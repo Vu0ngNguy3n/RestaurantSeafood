@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useParams } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 import { addDetail } from "../../actions/cartAction";
 import "./SeafoodDetail.scss";
@@ -10,13 +10,14 @@ function SeafoodDetail() {
   const { slug } = useParams();
   const [number, setNumber] = useState(1);
   const [isComment, setIsComment] = useState(false);
-
   const [id, setId] = useState();
   const [star, setStar] = useState(0);
   const [comment, setComment] = useState("");
+  const [totalRate, setTotalRate] = useState();
+  const account = useSelector((state) => state.account);
   const textRef = useRef();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const [listComment, setListComment] = useState([]);
 
   useEffect(() => {
@@ -25,6 +26,14 @@ function SeafoodDetail() {
       .then((res) => {
         setListComment(res.data[0]?.comment);
         setId(res.data[0]._id);
+        let total = 0;
+        let index = 0;
+        res.data[0]?.comment.forEach((item) => {
+          total += item?.rate;
+          index++;
+        });
+        let resultRate = total / index;
+        setTotalRate(resultRate.toFixed(2));
       })
       .catch((err) => console.log(err));
   }, [isComment]);
@@ -33,43 +42,62 @@ function SeafoodDetail() {
     const saveComment = {
       seafoodId: slug,
       comment: {
-        userId: 1,
+        userId: account._id,
+        displayName: account.displayName,
         rate: +star,
         content: comment,
       },
     };
-    if (comment === "" || star === 0) {
-      toast(
-        "Vui lòng bình luận và đánh giá sao cho sản phẩm trước khi hoàn tất đánh giá!!!"
-      );
-    } else {
-      if (listComment === undefined) {
-        axios
-          .post("/restaurant/comment", saveComment)
-          .then((res) => {
-            toast("Bình luận thành công");
-            setIsComment(!isComment);
-            setComment("");
-            textRef.current.focus();
-          })
-          .catch((err) => {
-            toast("Không thể bình luận");
-          });
+
+    if (account.username !== undefined) {
+      if (comment === "" || star === 0) {
+        toast(
+          "Vui lòng bình luận và đánh giá sao cho sản phẩm trước khi hoàn tất đánh giá!!!"
+        );
       } else {
-        axios
-          .post(`/restaurant/comment/updateComment/${id}`, saveComment)
-          .then((res) => {
-            toast("update thanh cong");
-            setIsComment(!isComment);
-            setComment("");
-            textRef.current.focus();
-          })
-          .catch((err) => {
-            toast("khong the add");
-          });
+        if (listComment === undefined) {
+          axios
+            .post("/restaurant/comment", saveComment)
+            .then((res) => {
+              toast("Bình luận thành công");
+              setIsComment(!isComment);
+              setComment("");
+              setStar(0);
+              textRef.current.focus();
+            })
+            .catch((err) => {
+              toast("Không thể bình luận");
+            });
+        } else {
+          axios
+            .post(`/restaurant/comment/updateComment/${id}`, saveComment)
+            .then((res) => {
+              toast("update thanh cong");
+              setIsComment(!isComment);
+              setComment("");
+              textRef.current.focus();
+            })
+            .catch((err) => {
+              toast("khong the add");
+            });
+        }
       }
+    } else {
+      navigate("/login");
+      toast("Bạn phải đăng nhập trước khi bình luận");
     }
   };
+
+  const handleDelete= (id) => {
+    axios.post(`/restaurant/comment/deleteComment/${id}`)
+    .then(res => {
+        const commentRemove = listComment.findIndex(item => {
+          return item._id === id
+        })
+        listComment.splice(commentRemove,1)
+        setListComment([...listComment])
+    }).catch(toast('remoove success'))
+  }
 
   const handleAddToCart = () => {
     const newItem = {
@@ -85,7 +113,6 @@ function SeafoodDetail() {
     toast(`Thêm ${number} Kg ${seafood?.name} vào giỏ hàng thành công!!!`);
   };
 
-  // const newId= parseInt(id)
   useEffect(() => {
     axios
       .get(`/restaurant/seafood/${slug}`)
@@ -107,7 +134,24 @@ function SeafoodDetail() {
             <h4>SẢN PHẨM</h4>
             <hr />
             <h2>{seafood?.name} - Hải sản Hồng Liên</h2>
-            <p>{seafood?.price} đ/Kg</p>
+            <p>
+              {seafood?.price?.toLocaleString("en-US", {
+                style: "currency",
+                currency: "VND",
+              })}{" "}
+              đ/Kg
+            </p>
+            {totalRate > 0 ? (
+              <p>
+                <span>{totalRate}</span>
+                <i
+                  class="fa-solid fa-star fa-fade"
+                  style={{ color: "orange" }}
+                ></i>
+              </p>
+            ) : (
+              <p>Chưa có đánh giá</p>
+            )}
             <div className="toCart">
               <div className="handleNumber">
                 <button
@@ -162,7 +206,7 @@ function SeafoodDetail() {
                   type="radio"
                   id="star4half"
                   name="rating"
-                  value="4"
+                  value="4.5"
                   onClick={(e) => setStar(e.target.value)}
                 />
                 <label
@@ -175,7 +219,7 @@ function SeafoodDetail() {
                   type="radio"
                   id="star4"
                   name="rating"
-                  value="4.5"
+                  value="4"
                   onClick={(e) => setStar(e.target.value)}
                 />
                 <label
@@ -281,11 +325,38 @@ function SeafoodDetail() {
               <ul>
                 {listComment?.map((item, index) => (
                   <li key={index}>
-                    <i
-                      class="fa-solid fa-user"
-                      style={{ marginRight: "4px" }}
-                    ></i>
-                    {item?.content}
+                    <div className="userComment">
+                      <i
+                        class="fa-solid fa-user fa-xl"
+                        style={{ marginRight: "4px" }}
+                      >
+                        <span style={{ color: "#f9004d", fontSize: "16px" }}>
+                          {item?.displayName}
+                        </span>
+                      </i>
+
+                      {account?._id === item?.userId ? (
+                        <i
+                          class="fa-solid fa-trash fa-xl "
+                          style={{ color: "orange", cursor: "pointer" }}
+                          onClick={()=>handleDelete(item?._id)}
+                        ></i>
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                    <div className="commentContent">
+                      <p>
+                        {item?.content}{" "}
+                        <span>
+                          <i>{item?.rate}</i>
+                          <i
+                            class="fa-solid fa-star fa-bounce"
+                            style={{ color: "orange" }}
+                          ></i>
+                        </span>
+                      </p>
+                    </div>
                   </li>
                 ))}
               </ul>

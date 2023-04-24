@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
 import { loginAccount } from '../../actions/accountAction';
 import './Login.scss'
@@ -11,6 +12,7 @@ function Login() {
   const [usename, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   useEffect(()=>{
     axios.get("/restaurant/account")
@@ -30,6 +32,7 @@ function Login() {
       const action = loginAccount(findAccount)
       dispatch(action)
       toast('Đăng nhập thành công')
+      navigate('/')
     }
   }
     return (

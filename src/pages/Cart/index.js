@@ -91,15 +91,16 @@ function Cart() {
               <th></th>
             </thead>
             <tbody>
+              {cartList[0]?.name === undefined ? 'Giỏ hàng rỗng':''}
               {cartList.map((item, index) => {
                 return (
                   <tr key={index}>
-                    <td onClick={() => moveToDetail(item?.id)} className="name" >
+                    <td onClick={() => moveToDetail(item?._id)} className="name" >
                       {item?.name}
                       <img  src={item?.img} alt=""/>
                     </td>
                     <td>
-                      {item?.price.toLocaleString("en-US", {
+                      {item?.price?.toLocaleString("en-US", {
                         style: "currency",
                         currency: "VND",
                       })}
@@ -121,7 +122,7 @@ function Cart() {
                       </button>
                     </td>
                     <td>
-                      {item?.totalPrice.toLocaleString("en-US", {
+                      {item?.totalPrice?.toLocaleString("en-US", {
                         style: "currency",
                         currency: "VND",
                       })}

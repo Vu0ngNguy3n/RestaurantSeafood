@@ -16,7 +16,7 @@ function BestSeller(){
     axios.get("/restaurant/seafood")
     .then(res => {
       const bestSellers = res.data
-      setBestSeller(bestSellers)
+      return setBestSeller(bestSellers)
     })
     .catch(error => console.log(error))
   },[])
@@ -25,7 +25,7 @@ function BestSeller(){
     const newItem = item
     const action = addToCart(newItem)
     dispatch(action)
-    toast(`${item.name} đã được thêm vào giỏ hàng!!!`)
+    toast(`${item?.name} đã được thêm vào giỏ hàng!!!`)
   }
 
   const moveDetail = (id) =>{
@@ -40,12 +40,12 @@ function BestSeller(){
         <div className={styles.listItems}>
           {bestSeller.map(item => {
             return (
-              <div className={styles.item} key={item._id}>
-                <img src={item.img} onClick={() => moveDetail(item._id)} />
-                <b>{item.name}</b>
+              <div className={styles.item} key={item?._id}>
+                <img src={item?.img} onClick={() => moveDetail(item?._id)} />
+                <b>{item?.name}</b>
                 <br />
                 <span className={styles.price}>
-                  {item.price.toLocaleString("en-US", {
+                  {item?.price?.toLocaleString("en-US", {
                     style: "currency",
                     currency: "VND",
                   })}
