@@ -14,11 +14,14 @@ function SeafoodDetail() {
   const [star, setStar] = useState(0);
   const [comment, setComment] = useState("");
   const [totalRate, setTotalRate] = useState();
+  const [listComment, setListComment] = useState([]);
+  const [editComment, setEditComment] = useState({ commentId: null });
+  const [newComment, setNewComment] = useState("");
+
   const account = useSelector((state) => state.account);
   const textRef = useRef();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [listComment, setListComment] = useState([]);
 
   useEffect(() => {
     axios
@@ -37,6 +40,16 @@ function SeafoodDetail() {
       })
       .catch((err) => console.log(err));
   }, [isComment]);
+
+  const handleEditComment = (id, content) => {
+    if (editComment === id) {
+      setEditComment({ commentId: null });
+    } else {
+      console.log(id, content);
+      setEditComment({ commentId: id });
+      setNewComment(content);
+    }
+  };
 
   const handleComment = () => {
     const saveComment = {
@@ -88,16 +101,18 @@ function SeafoodDetail() {
     }
   };
 
-  const handleDelete= (id) => {
-    axios.post(`/restaurant/comment/deleteComment/${id}`)
-    .then(res => {
-        const commentRemove = listComment.findIndex(item => {
-          return item._id === id
-        })
-        listComment.splice(commentRemove,1)
-        setListComment([...listComment])
-    }).catch(toast('remoove success'))
-  }
+  const handleDelete = (id) => {
+    axios
+      .post(`/restaurant/comment/deleteComment/${id}`)
+      .then((res) => {
+        const commentRemove = listComment.findIndex((item) => {
+          return item._id === id;
+        });
+        listComment.splice(commentRemove, 1);
+        setListComment([...listComment]);
+      })
+      .catch(toast("remoove success"));
+  };
 
   const handleAddToCart = () => {
     const newItem = {
@@ -138,7 +153,7 @@ function SeafoodDetail() {
               {seafood?.price?.toLocaleString("en-US", {
                 style: "currency",
                 currency: "VND",
-              })}{" "}
+              })}         
               đ/Kg
             </p>
             {totalRate > 0 ? (
@@ -336,18 +351,42 @@ function SeafoodDetail() {
                       </i>
 
                       {account?._id === item?.userId ? (
-                        <i
-                          class="fa-solid fa-trash fa-xl "
-                          style={{ color: "orange", cursor: "pointer" }}
-                          onClick={()=>handleDelete(item?._id)}
-                        ></i>
+                        <i>
+                          <i
+                            class="fa-solid fa-pencil"
+                            style={{
+                              marginRight: "10px",
+                              color: "#f9004d",
+                              fontSize: "1.6rem",
+                              cursor: "pointer",
+                            }}
+                            onClick={() =>
+                              handleEditComment(item?._id, item.content)
+                            }
+                          ></i>
+                          <i
+                            class="fa-solid fa-trash fa-xl "
+                            style={{ color: "orange", cursor: "pointer" }}
+                            onClick={() => handleDelete(item?._id)}
+                          ></i>
+                        </i>
                       ) : (
                         ""
                       )}
                     </div>
                     <div className="commentContent">
                       <p>
-                        {item?.content}{" "}
+                        {editComment.commentId !== item._id ? (
+                          item?.content
+                        ) : (
+                          <>
+                            <textarea
+                              value={newComment}
+                              onChange={(e) => setNewComment(e.target.value)}
+                            />
+                            <button>Lưu</button>
+                          </>
+                        )}
                         <span>
                           <i>{item?.rate}</i>
                           <i

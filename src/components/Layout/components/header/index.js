@@ -49,7 +49,7 @@ function Header() {
             />
             <span className={styles.dot}>{cart.length}</span>
           </Link>
-          <button className={styles.loginBtn}>
+          <button className={styles.loginBtn} >
             {account?.username === undefined
               ? ""
               : `Chào ${account?.displayName}`}
