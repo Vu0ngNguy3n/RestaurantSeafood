@@ -1,26 +1,31 @@
 import styles from "./Header.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleXmark, faSpinner, faSearch, faCartShopping } from "@fortawesome/free-solid-svg-icons";
-import {default as Image} from './seafood.png'
+import {
+  faCircleXmark,
+  faSpinner,
+  faSearch,
+  faCartShopping,
+} from "@fortawesome/free-solid-svg-icons";
+import { default as Image } from "./seafood.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../../actions/accountAction";
 function Header() {
-  const navigate = useNavigate()
-  const account = useSelector(state => state.account)
-  const cart = useSelector(state => state.cart)
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const account = useSelector((state) => state.account);
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
-  const handleLogin = () =>{
-    navigate('/login')
-  }
+  const handleLogin = () => {
+    navigate("/login");
+  };
 
-  const handleLogout = () =>{
-    const  account = {}
-    const action = logout(account)
-    dispatch(action)
-    navigate('/login')
-  }
+  const handleLogout = () => {
+    const account = {};
+    const action = logout(account);
+    dispatch(action);
+    navigate("/login");
+  };
 
   return (
     <header className={styles.wrapper}>
@@ -49,7 +54,7 @@ function Header() {
             />
             <span className={styles.dot}>{cart.length}</span>
           </Link>
-          <button className={styles.loginBtn} >
+          <button className={styles.loginBtn}>
             {account?.username === undefined
               ? ""
               : `Chào ${account?.displayName}`}
@@ -59,6 +64,12 @@ function Header() {
             onClick={() => navigate("/admin/home")}
           >
             {account?.role === 0 ? <p>Quản lí</p> : ""}
+          </button>
+          <button
+            className={styles.loginBtn}
+            onClick={() => navigate("/admin/orderList")}
+          >
+            {account?.role === 0 ? <p>Đơn hàng</p> : ""}
           </button>
           {account?.username === undefined ? (
             <button className={styles.loginBtn} onClick={handleLogin}>

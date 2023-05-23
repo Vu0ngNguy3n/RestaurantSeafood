@@ -168,7 +168,7 @@ function Cart() {
           <div className="totalPrice">
             <b>Tổng:</b>
             <span>
-              {total.toLocaleString("en-US", {
+              {total?.toLocaleString("en-US", {
                 style: "currency",
                 currency: "VND",
               })}{" "}

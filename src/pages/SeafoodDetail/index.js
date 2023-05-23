@@ -5,18 +5,23 @@ import { toast } from "react-toastify";
 import { addDetail } from "../../actions/cartAction";
 import "./SeafoodDetail.scss";
 import axios from "axios";
+import { Rating } from "react-simple-star-rating";
 function SeafoodDetail() {
   const [seafood, setSeafood] = useState();
   const { slug } = useParams();
   const [number, setNumber] = useState(1);
   const [isComment, setIsComment] = useState(false);
   const [id, setId] = useState();
-  const [star, setStar] = useState(0);
   const [comment, setComment] = useState("");
   const [totalRate, setTotalRate] = useState();
   const [listComment, setListComment] = useState([]);
   const [editComment, setEditComment] = useState({ commentId: null });
   const [newComment, setNewComment] = useState("");
+  const [rating, setRating] = useState(0);
+
+  const handleRating = (rate) => {
+    setRating(rate);
+  };
 
   const account = useSelector((state) => state.account);
   const textRef = useRef();
@@ -57,13 +62,13 @@ function SeafoodDetail() {
       comment: {
         userId: account._id,
         displayName: account.displayName,
-        rate: +star,
+        rate: +rating,
         content: comment,
       },
     };
 
     if (account.username !== undefined) {
-      if (comment === "" || star === 0) {
+      if (comment === "" || rating === 0) {
         toast(
           "Vui lòng bình luận và đánh giá sao cho sản phẩm trước khi hoàn tất đánh giá!!!"
         );
@@ -75,7 +80,7 @@ function SeafoodDetail() {
               toast("Bình luận thành công");
               setIsComment(!isComment);
               setComment("");
-              setStar(0);
+              setRating(0);
               textRef.current.focus();
             })
             .catch((err) => {
@@ -153,7 +158,7 @@ function SeafoodDetail() {
               {seafood?.price?.toLocaleString("en-US", {
                 style: "currency",
                 currency: "VND",
-              })}         
+              })}
               đ/Kg
             </p>
             {totalRate > 0 ? (
@@ -204,7 +209,27 @@ function SeafoodDetail() {
             />
             <div className="buttonInput">
               <div id="rating">
-                <input
+                <Rating
+                  onClick={handleRating}
+                  fillColorArray={[
+                    "#f17a45",
+                    "#f19745",
+                    "#f1a545",
+                    "#f1b345",
+                    "#f1d045",
+                  ]}
+                  showTooltip
+                  transition
+                  tooltipArray={[
+                    "Terrible",
+                    "Bad",
+                    "Average",
+                    "Great",
+                    "Prefect",
+                  ]}
+                  /* Available Props */
+                />
+                {/* <input
                   type="radio"
                   id="star5"
                   name="rating"
@@ -328,7 +353,7 @@ function SeafoodDetail() {
                   class="half"
                   for="starhalf"
                   title="Sucks big time - 0.5 stars"
-                ></label>
+                ></label> */}
               </div>
               <button onClick={handleComment}>Bình luận</button>
             </div>

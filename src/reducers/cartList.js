@@ -30,14 +30,14 @@ const cartReducer = (state = initState, action) => {
 
       return [...newList];
     }
-    case "ADD_DETAILS":{
-      const newList = [...state]
-      const newItem = action.payload
-      const findIndex = newList.findIndex(item => item._id === newItem._id)
-      if(findIndex===-1){
-        newList.push(newItem)
-      }else{
-        const newTotal = newList[findIndex].total
+    case "ADD_DETAILS": {
+      const newList = [...state];
+      const newItem = action.payload;
+      const findIndex = newList.findIndex((item) => item._id === newItem._id);
+      if (findIndex === -1) {
+        newList.push(newItem);
+      } else {
+        const newTotal = newList[findIndex].total;
         const newCardItem = {
           _id: newItem._id,
           name: newItem.name,
@@ -46,9 +46,9 @@ const cartReducer = (state = initState, action) => {
           total: +newItem.total + +newTotal,
           totalPrice: newItem.price * (+newItem.total + +newTotal),
         };
-        newList.splice(findIndex,1,newCardItem)
+        newList.splice(findIndex, 1, newCardItem);
       }
-      return [...newList]
+      return [...newList];
     }
     case "INCREASE_ITEM": {
       const newList = [...state];
@@ -60,7 +60,9 @@ const cartReducer = (state = initState, action) => {
         total: action.payload.total + 1,
         totalPrice: action.payload.price * (action.payload.total + 1),
       };
-      const index = newList.findIndex((item) => item._id === action.payload._id);
+      const index = newList.findIndex(
+        (item) => item._id === action.payload._id
+      );
       newList.splice(index, 1, newCartItem);
       return [...newList];
     }
@@ -84,11 +86,16 @@ const cartReducer = (state = initState, action) => {
         return [...newList];
       }
     }
-    case "REMOVE_ITEM":{
-      const newList = [...state]
-      const index = newList.findIndex(item => item._id === action.payload._id)
-      newList.splice(index,1)
-      return  [...newList]
+    case "REMOVE_ITEM": {
+      const newList = [...state];
+      const index = newList.findIndex(
+        (item) => item._id === action.payload._id
+      );
+      newList.splice(index, 1);
+      return [...newList];
+    }
+    case "RESET_ITEM": {
+      return [];
     }
     default:
       return state;

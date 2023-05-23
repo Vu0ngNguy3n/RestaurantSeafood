@@ -1,0 +1,83 @@
+.orderListContainer {
+  margin-top: 60px;
+}
+
+.titleOrder {
+  text-align: center;
+  font-weight: bold;
+  font-size: 3.4rem;
+  color: #f9004d;
+  margin-bottom: 20px;
+}
+
+.tableOrder {
+  width: 100%;
+  margin: 20px auto;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.tableOrder,
+.thOrder {
+  border: 1px solid white;
+  border-collapse: collapse;
+  padding: 15px;
+  text-align: center;
+  text-transform: capitalize;
+}
+.thOrder {
+  font-size: 20px;
+}
+
+.tdOrder {
+  font-size: 16px;
+  border-collapse: collapse;
+  padding: 15px;
+  text-align: center;
+  text-transform: capitalize;
+  transition: 0.2s;
+}
+
+.delivered {
+  display: flex;
+  justify-content: space-around;
+  .statusDeliver {
+    width: 60%;
+    border-color: #f9004d;
+    outline: none;
+    border-radius: 4px;
+  }
+  .deliveredBtn {
+    padding: 2px 6px;
+    border: 2px solid transparent;
+    background-color: #f9004d;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    width: 30%;
+  }
+}
+
+.tdDelete,
+.tdInfo {
+  &:hover {
+    background-color: var(--primary);
+    cursor: pointer;
+  }
+}
+
+.tbodyOrder {
+  .trOrder:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+}
+
+.tableOrder .thOrder {
+  background-color: var(--secondary);
+  color: white;
+}
+
+.statusDeliver {
+  cursor: pointer;
+  padding: 4px 14px;
+}

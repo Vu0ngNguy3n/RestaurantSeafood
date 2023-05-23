@@ -31,3 +31,10 @@ export const decreaseItem = (cart) => {
     payload: cart,
   };
 };
+
+export const resetItem = () => {
+  return {
+    type: "RESET_ITEM",
+    payload: null,
+  }
+}

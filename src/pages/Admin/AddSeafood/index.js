@@ -10,25 +10,38 @@ function AddSeafood() {
   const [name, setName] = useState("");
   const [type, setType] = useState(1);
   const [price, setPrice] = useState();
+  const [img, setImg] = useState();
   const navigate = useNavigate();
 
   const handleAdd = () => {
-    if(name == '' || price === undefined ){
-      toast('Vui long dien day du thong tin hai san!!!')
-    }else{
-       const newSeafood = {
-         seafoodType: type,
-         name: name,
-         price: price,
-         img: "https://haisantrungnam.vn/wp-content/uploads/2020/03/cua-hoang-de-king-crab-cua-huynh-de-cua-alaska-5-600x600.jpg",
-       };
-       axios
-         .post("/restaurant/seafood/", newSeafood)
-         .then((res) => {
-           toast(`Đã thêm Hải sản ${name} thành công!!!`);
-           navigate("/admin/home");
-         })
-         .catch(console.log("Khong the them"));
+    if (name == "" || price === undefined) {
+      toast("Vui long dien day du thong tin hai san!!!");
+    } else {
+      const data = new FormData();
+      data.append("file", img);
+      data.append("upload_preset", "seafood");
+      data.append("cloud_name", "dggciohw8");
+
+      fetch("https://api.cloudinary.com/v1_1/dggciohw8/image/upload", {
+        method: "post",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          const newSeafood = {
+            seafoodType: type,
+            name: name,
+            price: price,
+            img: data.url,
+          };
+          axios
+            .post("/restaurant/seafood/", newSeafood)
+            .then((res) => {
+              toast(`Đã thêm Hải sản ${name} thành công!!!`);
+              navigate("/admin/home");
+            })
+            .catch(console.log("Khong the them"));
+        });
     }
   };
 
@@ -70,7 +83,14 @@ function AddSeafood() {
         </div>
         <div className="inputRow">
           <label>Ảnh Hải sản</label>
-          <input type="file" placeholder="Nhập giá hải sản..." />
+          <input
+            type="file"
+            placeholder="Nhập giá hải sản..."
+            onChange={(e) => {
+              setImg(e.target.files[0]);
+            }}
+          />
+            
         </div>
         <div className="inputButton">
           <button onClick={handleAdd}>Thêm</button>
