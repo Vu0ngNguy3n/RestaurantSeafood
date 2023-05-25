@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import { toast } from "react-toastify";
 import "./OrderInformation.scss";
 
 function OrderInformation() {
@@ -8,6 +9,17 @@ function OrderInformation() {
   const [cart, setCart] = useState([]);
 
   const { slug } = useParams();
+  const navigate = useNavigate();
+
+  const handleDeleteOrder = (slug) => {
+    axios
+      .delete(`/restaurant/order/deleteOrder/${slug}`)
+      .then((res) => {
+        toast("Xoá order thành công");
+        navigate("/admin/orderList");
+      })
+      .catch(() => toast("Không thể xoá order"));
+  };
 
   useEffect(() => {
     axios
@@ -130,7 +142,7 @@ function OrderInformation() {
           </label>
         </div>
         <div className="rightAction">
-          <button>
+          <button onClick={() => handleDeleteOrder(orderDetail?._id)}>
             <i class="fa-solid fa-trash-can"></i>
             <label>Xoá đơn hàng</label>
           </button>

@@ -11,6 +11,7 @@ import EditSeafood from "../pages/Admin/EditSeafood";
 import Login from "../pages/Login/Login";
 import OrderList from "../pages/Admin/OrderList/OrderList";
 import OrderInformation from "../pages/Admin/OrderInformation/OrderInformation";
+import SignUp from "../pages/SignUp/SignUp";
 
 const publicRoutes = [
   { path: "/", component: Home },
@@ -27,8 +28,13 @@ const publicRoutes = [
     layout: HeaderOnly,
   },
   { path: "/admin/orderList", component: OrderList, layout: HeaderOnly },
-  { path: "/admin/orderInfo/:slug", component: OrderInformation, layout: HeaderOnly },
-  { path: "login", component: Login, layout: HeaderOnly },
+  {
+    path: "/admin/orderInfo/:slug",
+    component: OrderInformation,
+    layout: HeaderOnly,
+  },
+  { path: "/login", component: Login, layout: HeaderOnly },
+  { path: "/signup", component: SignUp, layout: HeaderOnly },
 ];
 
 const privateRoutes = [];

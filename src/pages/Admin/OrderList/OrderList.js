@@ -8,36 +8,61 @@ import "./OrderList.scss";
 function OrderList() {
   const [orderList, setOrderList] = useState();
   const [page, setPage] = useState(0);
-  const [isDelivered, setIsDelivered] = useState([]);
+  const [deleteId, setDeleteId] = useState();
+  const [modalShow, setModalShow] = useState(false);
+  const [deleverId, setDeliverId] = useState()
+  const [modalDeliver, setModalDeliver] = useState(false)
 
   const navigate = useNavigate();
 
-  const handleDeleteOrder = (slug) => {
+  const handleClose = () => {
+    setModalShow(false);
+  };
+
+  const handleClickDelete = (id) => {
+    setDeleteId(id);
+    setModalShow(true);
+  };
+
+  const handleDeleteOrder = () => {
     axios
-      .delete(`/restaurant/order/deleteOrder/${slug}`)
+      .delete(`/restaurant/order/deleteOrder/${deleteId}`)
       .then((res) => {
         const index = orderList.findIndex((item) => {
-          return item._id === slug;
+          return item._id === deleteId;
         });
         orderList.splice(index, 1);
         setOrderList([...orderList]);
+        setModalShow(false);
         toast("Xoá order thành công");
       })
       .catch(() => toast("Không thể xoá order"));
   };
 
-  const handleSelect = (value, id) => {
-    if (isDelivered.includes(id) == true ) {
-      const indexId = isDelivered.findIndex(e => e == id)
-      const newDelivered = isDelivered.splice(indexId, 1)
-      setIsDelivered([...newDelivered])
-      console.log(isDelivered);
-    } else {
-      const newDelivered = isDelivered
-      newDelivered.push(id)
-      setIsDelivered([...newDelivered])
-      console.log("id", isDelivered);
-    }
+  const handleCloseDeliver = () => {
+    setModalDeliver(false)
+  }
+
+  const handleClickDeliver = (id) => {
+    setDeliverId(id)
+    setModalDeliver(true)
+  }
+
+  const setDelivered = () => {
+    const newOrder = orderList?.find((item) => item._id == deleverId);
+    newOrder.delivered = true;
+    const index = orderList?.findIndex((item) => item._id == deleverId);
+    orderList.splice(index, 1, newOrder);
+    axios
+      .post(`/restaurant/order/updateDelivered`, newOrder)
+      .then((res) => {
+        toast(
+          `Đơn hàng ${deleverId} đã được chuyển sang trạng thái giao hàng thành công!!!`
+        );
+        setOrderList([...orderList]);
+        setModalDeliver(false)
+      })
+      .catch((err) => toast("Không thể update"));
   };
 
   const handleInfo = (id) => {
@@ -114,22 +139,27 @@ function OrderList() {
                     </i>
                   ) : (
                     <div className="delivered">
-                      <select
-                        className="statusDeliver"
-                        onChange={(e) =>
-                          handleSelect(e.target.value, order?._id)
-                        }
+                      <i
+                        style={{
+                          color: "red",
+                          fontSize: "16px",
+                          fontWeight: "500",
+                        }}
                       >
-                        <option value={false}>Chưa giao</option>
-                        <option value={true}>Đã giao hàng</option>
-                      </select>
-                      <button className="deliveredBtn">Lưu</button>
+                        Đang giao hàng
+                      </i>
+                      <button
+                        className="deliveredBtn"
+                        onClick={() => handleClickDeliver(order?._id)}
+                      >
+                        Đã giao
+                      </button>
                     </div>
                   )}
                 </td>
                 <td
                   className="tdOrder tdDelete"
-                  onClick={() => handleDeleteOrder(order?._id)}
+                  onClick={() => handleClickDelete(order?._id)}
                 >
                   <i class="fa-solid fa-trash-can"></i>
                 </td>
@@ -144,6 +174,41 @@ function OrderList() {
           })}
         </tbody>
       </table>
+
+      <div
+        className="modal-card"
+        style={{ display: modalShow === true ? "flex" : "none" }}
+      >
+        <div className="card cardContentOrder">
+          <h5 className="card-title">Xoá Đơn Hàng Này?</h5>
+          <p className="card-text">Bạn chắc chắn muốn xoá đơn hàng này?</p>
+          <div className="btnRow">
+            <button className="btnSuccess" onClick={handleDeleteOrder}>
+              Đồng ý
+            </button>
+            <button className="btnFail" onClick={handleClose}>
+              Huỷ Bỏ
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        className="modal-card"
+        style={{ display: modalDeliver === true ? "flex" : "none" }}
+      >
+        <div className="card cardContentOrder">
+          <h5 className="card-title">Đơn hàng này đã được chuyển?</h5>
+          <p className="card-text">Bạn chắc chắn đơn hàng này đã được vận chuyển thành công?</p>
+          <div className="btnRow">
+            <button className="btnSuccess" onClick={setDelivered}>
+              Đồng ý
+            </button>
+            <button className="btnFail" onClick={handleCloseDeliver}>
+              Huỷ Bỏ
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

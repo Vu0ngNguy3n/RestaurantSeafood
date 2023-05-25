@@ -107,7 +107,11 @@ function Payment() {
           <label>
             Số điện thoại <span style={{ color: "#f9004d" }}>*</span>
           </label>
-          <input value={phone} onChange={(e) => setPhone(e.target.value)} />
+          <input
+            value={phone}
+            type="number"
+            onChange={(e) => setPhone(e.target.value)}
+          />
         </div>
         <button onClick={() => navigate("/cart")}>Quay lại giỏ hàng</button>
       </div>

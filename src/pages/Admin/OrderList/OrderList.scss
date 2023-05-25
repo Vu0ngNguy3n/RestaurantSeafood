@@ -1,4 +1,5 @@
 .orderListContainer {
+  position: relative;
   margin-top: 60px;
 }
 
@@ -80,4 +81,61 @@
 .statusDeliver {
   cursor: pointer;
   padding: 4px 14px;
+}
+
+.modal-card {
+  top: -20%;
+  padding-top: 80px;
+  width: 100%;
+  height: 120%;
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  .cardContentOrder {
+    background-color: #f9004d;
+    width: 500px;
+    height: 200px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 15px;
+
+    .card-title {
+      border-bottom: 2px solid #ccc;
+      font-weight: bold;
+      font-size: 2.4rem;
+      color: white  ;
+    }
+    .card-text {
+      border-bottom: 2px solid #ccc;
+      color: white;
+      font-weight: 400;
+      font-size: 1.6rem;
+      letter-spacing: 2px;
+      letter-spacing: 3px;
+    }
+
+    .btnRow{
+      display: flex;
+      justify-content: right;
+
+      button{
+        margin-left: 16px;
+        border: 2px solid transparent;
+        padding: 4px 12px;
+        font-weight: 500;
+        font-size: 16px;
+        border-radius: 4px;
+      }
+
+      .btnSuccess{
+        background-color: var(--primary);
+        color: white;
+      }
+
+      .btnFail{
+        background-color: #ccc;
+      }
+    }
+  }
 }
