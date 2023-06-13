@@ -10,6 +10,7 @@ import { default as Image } from "./seafood.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../../actions/accountAction";
+
 function Header() {
   const navigate = useNavigate();
   const account = useSelector((state) => state.account);
@@ -67,9 +68,13 @@ function Header() {
           </button>
           <button
             className={styles.loginBtn}
-            onClick={() => navigate("/admin/orderList")}
+            onClick={() =>
+              account?.role === 0
+                ? navigate("/admin/orderList")
+                : navigate(`/userOrder/${account.username}`)
+            }
           >
-            {account?.role === 0 ? <p>Đơn hàng</p> : ""}
+            <p>Đơn hàng</p>
           </button>
           {account?.username === undefined ? (
             <button className={styles.loginBtn} onClick={handleLogin}>

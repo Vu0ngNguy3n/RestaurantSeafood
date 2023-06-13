@@ -1,4 +1,5 @@
 import axios from "axios";
+import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
@@ -18,6 +19,9 @@ function Payment() {
   const account = useSelector((state) => state.account);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const currentDate = new Date();
+  const formatDate = format(currentDate, "dd/MM/yyyy HH:mm:ss");
 
   useEffect(() => {
     let total = 0;

@@ -12,6 +12,7 @@ import Login from "../pages/Login/Login";
 import OrderList from "../pages/Admin/OrderList/OrderList";
 import OrderInformation from "../pages/Admin/OrderInformation/OrderInformation";
 import SignUp from "../pages/SignUp/SignUp";
+import UserOrder from "../pages/UserOrder/UserOrder";
 
 const publicRoutes = [
   { path: "/", component: Home },
@@ -20,6 +21,7 @@ const publicRoutes = [
   { path: "/cart", component: Cart, layout: HeaderOnly },
   { path: "/detail/:slug", component: SeafoodDetail, layout: HeaderOnly },
   { path: "/payment", component: Payment, layout: HeaderOnly },
+  { path: "/userOrder/:slug", component: UserOrder, layout: HeaderOnly },
   { path: "/admin/home", component: HomeDashboard, layout: HeaderOnly },
   { path: "/admin/addSeafood", component: AddSeafood, layout: HeaderOnly },
   {
