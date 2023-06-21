@@ -66,7 +66,11 @@ function Cart() {
   };
 
   const handlePayment = () => {
-    navigate("/payment");
+    if(cartList[0]?.name === undefined){
+      toast("Đơn hàng rỗng!!")
+    }else{
+      navigate("/payment");
+    }
   };
   return (
     <div className="cartDetail">

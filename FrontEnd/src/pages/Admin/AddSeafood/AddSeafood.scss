@@ -26,12 +26,25 @@
         font-size: 1.6rem;
         font-weight: 400;
         &:focus {
-          border-color: var(--primary);
+          border-bottom-color: var(--primary);
+          transition: .4s;
+          transform: scale(1.05);
         }
       }
 
       select {
         padding: 6px 14px;
+        border: 2px solid transparent;
+        border-bottom-color: #ccc;
+        outline: none;
+        cursor: pointer;
+
+        &:focus{
+          border-bottom: 2px solid var(--primary);
+        }
+
+        option{
+        }
       }
     }
 

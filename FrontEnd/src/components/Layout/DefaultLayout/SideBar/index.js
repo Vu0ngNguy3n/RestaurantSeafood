@@ -82,13 +82,13 @@ function SideBar() {
               </span>
             </li>
             <li>
-              <span>
+              <a className={styles.address} href="https://www.google.com/maps/place/Ch%E1%BB%A3+H%E1%BA%A3i+s%E1%BA%A3n+C%E1%BB%ADa+L%C3%B2/@18.8077607,105.7166993,17z/data=!3m1!4b1!4m6!3m5!1s0x3139d471c8830e93:0x6c7abeb80585df45!8m2!3d18.8077607!4d105.7192742!16s%2Fg%2F12vsljb4j?hl=vi-VN&entry=ttu">
                 <FontAwesomeIcon
                   className={styles.iconcontact}
                   icon={faLocationDot}
                 />
                 Cửa Lò, Nghệ An
-              </span>
+              </a>
             </li>
             <li>
               <span>
