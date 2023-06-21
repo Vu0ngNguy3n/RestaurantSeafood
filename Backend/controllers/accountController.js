@@ -26,6 +26,14 @@ const accountController = {
       res.status(500).json(err);
     }
   },
+  changePassword: async(req, res) =>{
+    try{
+        const account = await Account.findOneAndUpdate({username: req.body.username}, {password: req.body.password}, {new: true})
+        res.status(200).json(account)
+    }catch(err){
+      res.status(500).json(err)
+    }
+  }
 };
 
 module.exports = accountController;

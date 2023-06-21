@@ -65,7 +65,7 @@ const mailerController = {
         service: "gmail",
         auth: {
           user: "vuongnv282@gmail.com", // generated ethereal user
-          pass: "nswzqdnnggnyxatx", // generated ethereal password
+          pass: "rjspofxjfwqmlykx", // generated ethereal password
         },
       });
 
@@ -103,6 +103,41 @@ const mailerController = {
       res.status(500).json(err);
     }
   },
+  sendCode: async(req, res) => {
+    try{
+      const content = req.body;
+      let transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: "vuongnv282@gmail.com", // generated ethereal user
+          pass: "rjspofxjfwqmlykx", // generated ethereal password
+        },
+      });
+
+       await transporter.sendMail(
+        {
+          from: "vuongnv282@gmail.com", // sender address
+          to: `${content.email}`, // list of receivers
+          subject: `Code xác minh mật khẩu`, // Subject line
+          text: `Code của bạn là`, // plain text body
+          html: `<p>Mã code lấy lại mật khẩu của bạn là ${content.code}</p>`, // html body
+        },
+        (err) => {
+          if (err) {
+            return res.json({
+              message: `${req.body}`,
+              err,
+            });
+          }
+          return res.json({
+            message: "success",
+          });
+        }
+      );
+    }catch(err ){
+      res.status(500).json(err)
+    }
+  }
 };
 
 module.exports = mailerController;
