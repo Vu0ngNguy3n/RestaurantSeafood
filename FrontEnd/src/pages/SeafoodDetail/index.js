@@ -46,6 +46,10 @@ function SeafoodDetail() {
       .catch((err) => console.log(err));
   }, [isComment]);
 
+  useEffect(() => {
+    number<1?setNumber(1):setNumber(number) 
+  },[number])
+
   const handleEditComment = (id, content) => {
     if (editComment === id) {
       setEditComment({ commentId: null });
@@ -120,7 +124,7 @@ function SeafoodDetail() {
   };
 
   const handleAddToCart = () => {
-    const newItem = {
+      const newItem = {
       _id: seafood?._id,
       name: seafood?.name,
       price: seafood?.price,

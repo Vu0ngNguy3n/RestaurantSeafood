@@ -13,6 +13,8 @@ import OrderList from "../pages/Admin/OrderList/OrderList";
 import OrderInformation from "../pages/Admin/OrderInformation/OrderInformation";
 import SignUp from "../pages/SignUp/SignUp";
 import UserOrder from "../pages/UserOrder/UserOrder";
+import ChangePassword from "../pages/ChangePassword";
+import RememberPassword from '../pages/RememberPassword/RememberPassword'
 
 const publicRoutes = [
   { path: "/", component: Home },
@@ -37,6 +39,8 @@ const publicRoutes = [
   },
   { path: "/login", component: Login, layout: HeaderOnly },
   { path: "/signup", component: SignUp, layout: HeaderOnly },
+  { path: "/changePassword", component: ChangePassword, layout: HeaderOnly},
+  {path: "/rememberPassword", component: RememberPassword, layout: HeaderOnly}
 ];
 
 const privateRoutes = [];

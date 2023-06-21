@@ -86,7 +86,12 @@ function Login() {
           </p>
           <div className="handle">
             <button onClick={handleLogin}>Đăng nhập</button>
-            <a className="remember">Quên mật khẩu</a>
+            <a 
+            className="remember"
+            onClick={() => navigate("/changePassword")}
+            style={{textAlign: "center"}} 
+            >Đổi mật khẩu</a>
+            <a className="remember" onClick={() => navigate("/rememberPassword")}>Quên mật khẩu</a>
           </div>
           <div className="register">
             <b>Bạn chưa có tài khoản? </b>
