@@ -94,6 +94,7 @@ function SignUp() {
             />
           </div>
           <div className="handle">
+            <button onClick={() =>  navigate("/login")}><i class="fa-solid fa-arrow-left"></i></button>
             <button onClick={() => handleSignUp()}>Đăng Ký</button>
           </div>
         </div>

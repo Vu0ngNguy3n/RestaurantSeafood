@@ -39,7 +39,14 @@ function RememberPassword(){
                         resultCode+=(Math.random()*10)*(Math.pow(10,index));
                     }
                     setCodeDefault(Math.round(resultCode))
-                    setStatusPage(2)
+                    const codeInfor = {email: email, code:Math.round(resultCode)}
+                    axios
+                    .post(`/restaurant/mail/sendCode`,codeInfor)
+                    .then((res) => {
+                        toast("Mã xác minh đã được gửi, vui lòng check mail để nhận mã đổi mật khẩu!!")
+                        setStatusPage(2)
+                    })
+                    .then(err => toast(err))
                 }else{
                     toast("Tài khoản này không tồn tại")
                 }
@@ -52,6 +59,7 @@ function RememberPassword(){
         if(+code !== +codeDefault){
             toast("Code không đúng!!")
         }else{
+            toast("Mã xác nhận chính xác!!")
             setStatusPage(3)   
         }
     }
@@ -102,7 +110,6 @@ function RememberPassword(){
             <div className="receiveCode" style={{display: statusPage === 2 ? "flex":"none"}}>
                 <h2 className="titleRemember">Xác Minh Code</h2>
                  <div className="input">
-                    {codeDefault}
                     <label htmlFor="code">Code</label>
                     <input
                         id="code"

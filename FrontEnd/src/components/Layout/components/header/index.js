@@ -107,7 +107,7 @@ function Header() {
                 : navigate(`/userOrder/${account.username}`)
             }
           >
-            <p>Đơn hàng</p>
+          {account?.username === undefined?"":<p>Đơn hàng</p> }  
           </button>
           {account?.username === undefined ? (
             <button className={styles.loginBtn} onClick={handleLogin}>

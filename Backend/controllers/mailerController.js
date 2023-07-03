@@ -118,7 +118,7 @@ const mailerController = {
         {
           from: "vuongnv282@gmail.com", // sender address
           to: `${content.email}`, // list of receivers
-          subject: `Code xác minh mật khẩu`, // Subject line
+          subject: `Hồng Liên Hải Sản Cửa Lò`, // Subject line
           text: `Code của bạn là`, // plain text body
           html: `<p>Mã code lấy lại mật khẩu của bạn là ${content.code}</p>`, // html body
         },
